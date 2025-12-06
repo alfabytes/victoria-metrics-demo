@@ -1,0 +1,15 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: nginx
+  namespace: app-example
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  endpoints:
+  - port: http
+    path: /status
+    interval: 15s
+    scrapeTimeout: 5s
+

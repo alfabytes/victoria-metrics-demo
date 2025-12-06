@@ -20,18 +20,11 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx:1.25-alpine
+        image: nginx:1.26
         ports:
         - containerPort: 80
           name: http
           protocol: TCP
-        volumeMounts:
-        - name: nginx-config
-          mountPath: /etc/nginx/nginx.conf
-          subPath: nginx.conf
-          readOnly: true
-        - name: nginx-logs
-          mountPath: /var/log/nginx
         resources:
           requests:
             cpu: 100m
@@ -39,22 +32,3 @@ spec:
           limits:
             cpu: 500m
             memory: 256Mi
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 80
-          initialDelaySeconds: 10
-          periodSeconds: 10
-        readinessProbe:
-          httpGet:
-            path: /health
-            port: 80
-          initialDelaySeconds: 5
-          periodSeconds: 5
-      volumes:
-      - name: nginx-config
-        configMap:
-          name: nginx-config
-      - name: nginx-logs
-        emptyDir: {}
-

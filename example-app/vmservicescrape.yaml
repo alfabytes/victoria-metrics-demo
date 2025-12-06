@@ -9,7 +9,7 @@ spec:
       app: nginx
   endpoints:
   - port: http
-    path: /status
+    path: /
     interval: 15s
     scrapeTimeout: 5s
 
